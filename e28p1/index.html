@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+
+    <title>'Are you a Lebowski Achiever? A Vue.js Big Lebowski Trivia Game (of Sorts)'</title>
+    <meta charset='utf-8'>
+    <link href=data:, rel=icon>
+    <link rel='stylesheet' href='css/style.css'>
+
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js' defer></script>
+    <script src='js/script.js' defer></script>
+
+</head>
+
+<body>
+    <h1>Are you a Lebowski Achiever? A Vue.js Big Lebowski Trivia Game (of Sorts)</h1>
+    <h2>By: Valerie Morris</h2>
+
+    <div id='app' v-cloak>
+        <div v-for='(question, index) in quiz.questions'>
+            <!-- show current question -->
+            <div v-show='index === questionIndex'>
+                <h3>{{ question.text }}</h3>
+                <!-- list of radio buttoned answers -->
+                <ol>
+                    <li v-for='answer in question.answers'>
+                        <label><input type='radio' v-bind:name='index' v-bind:value='answer.correct' v-model='userResponses[index]'> {{answer.text}}</label>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- show running score and next button only when quiz is in progress -->
+        <div v-show='questionIndex < quiz.questions.length'>
+            <button type='submit' v-on:click.self='next'>Next</button><br><br><br><br>
+
+            <h3>Current score:</h3>
+            <p> {{ correct() }} / {{ quiz.questions.length }} </p>
+            <button type='submit' v-on:click.self='restart'>Restart Quiz</button>
+        </div>
+        <!-- show final score, message, Play Again button, and game history when quiz round is complete -->
+        <div v-show='questionIndex === quiz.questions.length'>
+            <h3>Final Result:</h3>
+            <p v-bind:class='{ win: gameWon, lose: gameLost }'> {{ winorlose() }} {{ correct() }} / {{ quiz.questions.length }}!</p><br><br>
+            <button type='submit' v-on:click.self='restart'>Play Again</button>
+
+            <br><br>
+            <h3>Game History:</h3>
+            <div class='history'>
+                <score-history v-for='round in rounds' v-on:delete-round='deleteRound($event)' v-bind:key='round.number' v-bind:number='round.number' v-bind:outcome='round.outcome'>
+                </score-history>
+            </div>
+        </div>
+    </div>
+
+</body></html>

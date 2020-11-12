@@ -1,0 +1,47 @@
+[v-cloak] {
+    display: none;
+}
+
+body {
+    background-color: blanchedalmond;
+}
+
+h1,
+h2 {
+    text-align: center;
+    color: navy;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+h3 {
+    color: navy;
+    font-family: monospace;
+    font-weight: bolder;
+}
+
+p,
+ol {
+    font-family: monospace;
+    font-weight: 100;
+    color: navy;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+.win {
+    color: green;
+}
+
+.lose {
+    color: red;
+}
+
+.history {
+    font-family: monospace;
+    font-weight: 50;
+    color: navy;
+}
